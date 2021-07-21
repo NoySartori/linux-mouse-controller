@@ -17,6 +17,8 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import static android.view.MotionEvent.ACTION_DOWN;
+
 public class MainActivity extends AppCompatActivity {
     ConnectTask connectTask;
 
@@ -31,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        // If is not action down event we skip it to avoid
+        // sending linux server command twice.
+        if (event.getActionMasked() != ACTION_DOWN) {
+            return true;
+        }
+
         Rect rectangle = new Rect();
         Window window = getWindow();
         window.getDecorView().getWindowVisibleDisplayFrame(rectangle);
