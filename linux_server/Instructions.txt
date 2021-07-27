@@ -1,1 +1,6 @@
+# In order to build the server, run
+
 gcc server.c -o server.o -lX11
+
+And in order to execute the server, run
+./server.o
